@@ -256,7 +256,7 @@ identifiers_number <- grade_e2 %>%
 grade_e3<-left_join(grade_e2,identifiers_number,by="species_bin")
 
 #Check for synonyms for each species in the data set
-sinonimos<-synonyms(unique(grade_e3$species),db="worms")
+sinonimos<-taxize::synonyms(unique(grade_e3$species),db="worms")
 
 result_df <- data.frame(Name = character(), Synonyms = character(), stringsAsFactors = FALSE)
 for (i in seq_along(sinonimos)) {
