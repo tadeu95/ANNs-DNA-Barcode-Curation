@@ -225,9 +225,6 @@ taxon19<-taxon19[order(taxon19$species),]
 grade_e<-taxon19[taxon19$grade=="E",]
 
 #Count sequences in each BIN
-otu_counts <- table(grade_e$BIN)
-
-grade_e$count_in_cluster <- otu_counts[grade_e$BIN]
 grade_e$count_in_cluster <- ave(seq_along(grade_e$BIN), grade_e$BIN, FUN = length)
 
 #Calculate the number and percentage of sequences in a BIN, belonging to a particular species
