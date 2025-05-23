@@ -437,21 +437,7 @@ full_predictions<-left_join(predicted,grade_e11[,c("processid_nn","processid","s
 diferentes<-data.frame(unique(full_predictions[full_predictions$ground_truth_nn != full_predictions$predicted_label_binary_nn,c("BIN")]))
 names(diferentes)<-"BIN"
 
-#After labelling testing set with ground truths, read back from excel to prepare for deep learning
-excel_test<-read.table("clipboard",sep="\t",header=TRUE,dec=".",quote = "")
 
-testing_set<-inner_join(grade_e12,excel_test[,c("ground_truth","processid")],by="processid")
-
-testing_set$ground_truth_nn <-as.numeric(testing_set$ground_truth == "reliable")
-
-testing_set$processid<-NULL
-testing_set$ground_truth<-NULL
-
-write_tsv(testing_set,"testing_set_for_nn.tsv")
-
-#After the predictions with the trained model, compare the results
-predicted<-read.delim("result_file.tsv")
-full_predictions<-left_join(predicted,grade_e11[,c("processid_nn","processid","species","BIN")],by="processid_nn")
 
 
 
